@@ -1,0 +1,24 @@
+{
+  "name": "nairaaid",
+  "version": "0.1.0",
+  "description": "NairaAid - transparent, rules-based aid and community payouts in naira stablecoin (cNGN) on Celo",
+  "author": "Lawal Ridwan",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "demo": "hardhat run scripts/demo.ts",
+    "deploy:local": "hardhat run scripts/deploy.ts",
+    "deploy:celoSepolia": "hardhat run scripts/deploy.ts --network celoSepolia",
+    "deploy:baseSepolia": "hardhat run scripts/deploy.ts --network baseSepolia"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
