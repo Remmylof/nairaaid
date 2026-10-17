@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NairaAid — Transparent aid payouts in naira on Celo</title>
+  <meta name="description" content="NairaAid: transparent, trackable aid and community payouts in naira (cNGN on Celo), delivered straight to people's phones. Interactive demo.">
+  <meta name="author" content="Lawal Ridwan">
+  <meta name="theme-color" content="#0b6b3a">
+  <meta property="og:title" content="NairaAid — Transparent aid payouts in naira">
+  <meta property="og:description" content="Donors fund, two independent verifiers confirm, recipients get paid by rules nobody can bend, and every naira is publicly traceable.">
+  <meta property="og:url" content="https://remmylof.github.io/nairaaid/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b6b3a'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3E%E2%82%A6%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="docs/style.css">
+</head>
+<body>
+  <a class="skip" href="#demo">Skip to demo</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="NairaAid home">
+        <span class="logo" aria-hidden="true">₦</span>
+        <span class="brand-name">Naira<span>Aid</span></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#problem">Problem</a>
+        <a href="#demo">Demo</a>
+        <a href="#ledger">Ledger</a>
+        <a href="#why">Why Web3</a>
+        <a href="#how">How it works</a>
+        <a href="#roadmap">Roadmap</a>
+        <a class="nav-gh" href="https://github.com/Remmylof/nairaaid" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">cNGN on Celo · SMU Web3 for Social Good 2026</p>
+          <h1><span class="hl">NairaAid</span> — Transparent, trackable aid and community payouts in naira, delivered straight to people's phones.</h1>
+          <p class="lead">Donors fund a campaign. Two independent local verifiers confirm who qualifies. Recipients are paid by rules nobody can bend, every naira is publicly traceable, and whatever isn't spent goes back to donors.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="#demo">Try the demo</a>
+            <a class="btn btn-ghost btn-lg" href="#how">How it works</a>
+          </div>
+          <p class="live-pill" id="live-pill" aria-live="polite">Demo: ₦0 raised · 0/5 verified · Month 1</p>
+        </div>
+        <div class="hero-card" aria-label="Illustrative pilot figures">
+          <div class="hero-card-head">
+            <span class="logo logo-sm" aria-hidden="true">₦</span>
+            <div>
+              <strong>Ilorin student support</strong>
+              <span class="muted small">Illustrative pilot figures</span>
+            </div>
+          </div>
+          <div class="figs">
+            <div class="fig"><span class="fig-n">₦500,000</span><span class="fig-l">raised</span></div>
+            <div class="fig"><span class="fig-n">5</span><span class="fig-l">students</span></div>
+            <div class="fig fig-zero"><span class="fig-n">₦0</span><span class="fig-l">lost to middlemen</span></div>
+          </div>
+          <div class="hero-flow">
+            <span>Donors</span><i>→</i><span>Smart contract</span><i>→</i><span>Phones</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="section" id="problem">
+      <div class="wrap">
+        <p class="eyebrow">The problem</p>
+        <h2>Help is generous. The path it takes is not.</h2>
+        <div class="cards3">
+          <article class="card">
+            <div class="icon" aria-hidden="true">⇄</div>
+            <h3>Middlemen</h3>
+            <p>Donations in Nigeria often pass through several hands: a coordinator, an account holder, a cash handout. Each step is a chance for "admin costs", padded lists or diversion.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">⏱</div>
+            <h3>Late arrival</h3>
+            <p>School fees have deadlines and rent is due monthly. Help that arrives weeks late, after queues and manual approvals, often arrives too late to matter.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">?</div>
+            <h3>No checkable record</h3>
+            <p>Donors, especially in the diaspora, get a WhatsApp screenshot at best. There's no record anyone can check, and leftover funds quietly stay with the organiser.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo -->
+    <section class="section section-tint" id="demo">
+      <div class="wrap">
+        <div class="demo-head">
+          <div>
+            <p class="eyebrow">Interactive demo</p>
+            <h2>Run a campaign end to end</h2>
+            <p class="muted">A simulation of the <code>NairaAidCampaigns</code> contract running in your browser. Fake transaction hashes, no wallet needed, nothing is saved.</p>
+          </div>
+          <button class="btn btn-ghost" data-reset>Reset demo</button>
+        </div>
+
+        <!-- Step 1 -->
+        <article class="step" id="step-fund">
+          <div class="step-label"><span class="step-n">1</span><div><h3>Fund</h3><p class="muted small">Donors give in naira. Money goes into the campaign pool, not anyone's personal account.</p></div></div>
+          <div class="step-body two-col">
+            <div>
+              <div class="campaign">
+                <div class="campaign-top">
+                  <div>
+                    <strong>Ilorin student support</strong>
+                    <p class="muted small">School fees + monthly stipend for 5 students</p>
+                  </div>
+                  <span class="tag tag-ok" id="campaign-status">Active</span>
+                </div>
+                <ul class="rules">
+                  <li><span>Stipend</span><strong>₦20,000 / month × 3</strong></li>
+                  <li><span>School fees milestone</span><strong>₦50,000 each</strong></li>
+                  <li><span>Recipients</span><strong>up to 5</strong></li>
+                  <li><span>Goal</span><strong>₦500,000</strong></li>
+                </ul>
+                <div class="progress-meta"><strong id="fund-raised">₦0</strong><span class="muted">of ₦500,000 · <span id="fund-pct">0%</span></span></div>
+                <div class="progress" role="progressbar" aria-label="Funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar" id="fund-bar"></div></div>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="btn-donate-bank">Donate ₦100,000 · bank on-ramp</button>
+                <button class="btn btn-gold" id="btn-donate-diaspora">Diaspora stablecoin gift · ₦100,000</button>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="fee-toggle" checked>
+                <span>Add optional 2% organiser fee, paid <strong>on top</strong> by the donor (cap 3%). Never deducted from recipients.</span>
+              </label>
+              <p class="small muted">Organiser fees collected so far: <strong id="fees-total">₦0</strong> (kept outside the campaign pool)</p>
+              <p class="feedback" id="fund-feedback" aria-live="polite"></p>
+            </div>
+            <div>
+              <h4 class="mini-h">Donors</h4>
+              <ul class="donor-list" id="donor-list"></ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="step" id="step-verify">
+          <div class="step-label"><span class="step-n">2</span><div><h3>Verify</h3><p class="muted small">Recipients are anonymous IDs on-chain. A student is verified only after <strong>two different</strong> verifiers attest.</p></div></div>
+          <div class="step-body">
+            <div class="verifiers">
+              <div class="vchip"><span class="dot dot-a"></span><strong>Verifier A</strong> Faculty officer</div>
+              <div class="vchip"><span class="dot dot-b"></span><strong>Verifier B</strong> Student union</div>
+              <button class="btn btn-sm btn-danger-ghost" id="btn-double">Try: same verifier attests twice</button>
+            </div>
+            <div class="rlist" id="verify-list"></div>
+            <p class="feedback" id="verify-feedback" aria-live="polite"></p>
+            <p class="small muted">On-chain an ID is <code>keccak256(phone ‖ salt)</code> plus a payout wallet. Names, phone numbers and documents stay off-chain with the verifiers.</p>
+          </div>
+        </article>
+
+        <!-- Step 3 -->
+        <article class="step" id="step-pay">
+          <div class="step-label"><span class="step-n">3</span><div><h3>Payouts</h3><p class="muted small">Stipends go only to verified IDs, once per month. School fees release only when both verifiers confirm the invoice.</p></div></div>
+          <div class="step-body">
+            <div class="pay-bar">
+              <span class="month" id="month-label">Month 1 of 3</span>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="btn-pay-all">Pay this month's stipend to all verified</button>
+                <button class="btn btn-ghost" id="btn-advance">Advance month →</button>
+                <button class="btn btn-danger-ghost" id="btn-withdraw">Organiser tries to withdraw</button>
+              </div>
+            </div>
+            <div class="rlist" id="payout-list"></div>
+            <p class="feedback" id="payout-feedback" aria-live="polite"></p>
+          </div>
+        </article>
+
+        <!-- Ledger + phone -->
+        <div class="ledger-phone" id="ledger">
+          <article class="step step-ledger">
+            <div class="ledger-head">
+              <div>
+                <p class="eyebrow">Public ledger</p>
+                <h3>Every event, visible to everyone</h3>
+              </div>
+              <button class="btn btn-ghost btn-sm" id="btn-close">Close campaign &amp; refund leftovers</button>
+            </div>
+            <div class="stats">
+              <div class="stat"><span>Balance</span><strong id="stat-balance">₦0</strong></div>
+              <div class="stat"><span>Paid out</span><strong id="stat-paid">₦0</strong></div>
+              <div class="stat"><span>Remaining to goal</span><strong id="stat-remaining">₦500,000</strong></div>
+              <div class="stat"><span>Refunded</span><strong id="stat-refunded">₦0</strong></div>
+            </div>
+            <p class="feedback" id="ledger-feedback" aria-live="polite"></p>
+            <div class="table-wrap">
+              <table class="ledger">
+                <thead><tr><th>Tx hash</th><th>Event</th><th>Who</th><th class="num">Amount</th><th>Period</th><th>Time</th></tr></thead>
+                <tbody id="ledger-body"></tbody>
+              </table>
+            </div>
+            <p class="small muted">Closing snapshots the unspent balance; each donor gets <code>donation × unspent ÷ total raised</code>. Rejected attempts are shown too, in red.</p>
+          </article>
+
+          <aside class="phone-col" aria-label="Recipient phone">
+            <label class="small muted" for="phone-select">Recipient phone</label>
+            <select id="phone-select" class="select"></select>
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="phone-status"><span>9:41</span><span>NairaAid</span><span>▮▮▮</span></div>
+                <div class="phone-top">
+                  <span class="logo logo-xs" aria-hidden="true">₦</span>
+                  <div><span class="muted small">Wallet</span><strong id="phone-id">NA-7F3C</strong></div>
+                </div>
+                <div class="phone-alert is-empty" id="phone-alert">
+                  <strong id="phone-alert-title">No payments yet</strong>
+                  <span id="phone-alert-sub">Verify this ID in Step 2 first.</span>
+                </div>
+                <div class="phone-bal"><span class="muted small">Balance</span><strong id="phone-balance">₦0</strong></div>
+                <div class="phone-actions">
+                  <button class="btn btn-sm btn-primary" id="ph-bank">Cash out to bank</button>
+                  <button class="btn btn-sm btn-ghost" id="ph-momo">Mobile money</button>
+                  <button class="btn btn-sm btn-ghost" id="ph-spend">Spend</button>
+                </div>
+                <ul class="phone-feed" id="phone-feed"></ul>
+                <p class="ussd">USSD <code>*xxx#</code> for feature phones — coming soon</p>
+              </div>
+            </div>
+            <p class="feedback" id="phone-feedback" aria-live="polite"></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Web3 -->
+    <section class="section" id="why">
+      <div class="wrap">
+        <p class="eyebrow">Why Web3</p>
+        <h2>Rules in code, not promises</h2>
+        <div class="cards4">
+          <article class="card"><h3>Nobody can bend the rules</h3><p>Stipend amounts, periods, milestones and the recipient cap are fixed when the campaign is created. Not even the organiser can change them.</p></article>
+          <article class="card"><h3>Checkable by anyone</h3><p>Every donation, verification, payout and refund is a public event. A donor in London sees the same record as a student in Ilorin.</p></article>
+          <article class="card"><h3>Naira, not volatile crypto</h3><p>cNGN is a regulated, 1:1 naira-backed stablecoin on Celo. Recipients think and spend in naira, and Celo fees are a fraction of a cent.</p></article>
+          <article class="card"><h3>Private by design</h3><p>Only anonymous IDs and wallets go on-chain. Vulnerable people aren't exposed, but ghost beneficiaries are much harder to create.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section-tint" id="how">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2>One contract: <code>NairaAidCampaigns.sol</code> on Celo</h2>
+        <p class="muted maxw">This demo mirrors the Solidity contract in the repository. It is an unaudited hackathon prototype, deployed to testnets only.</p>
+        <ol class="how">
+          <li><strong>Create a campaign</strong><span><code>createCampaign</code> fixes the stipend per period, number of periods, milestones (e.g. school fees ₦50,000), the recipient cap and an eligibility document.</span></li>
+          <li><strong>Fund it</strong><span><code>fund()</code> records every donation per donor. The optional organiser fee (capped at 3%) is paid on top, so recipients always get the full rule amount.</span></li>
+          <li><strong>2-verifier registration</strong><span><code>registerRecipient</code> activates an ID only when two different verifiers attest the same anonymous ID and the same wallet. The organiser can never be a verifier.</span></li>
+          <li><strong>Stipend periods</strong><span><code>claimStipend</code> pays each period that has started, exactly once, and only to the recipient's registered wallet.</span></li>
+          <li><strong>Milestones</strong><span><code>confirmMilestone</code> releases a payout when a second, different verifier confirms. One verifier can't confirm twice.</span></li>
+          <li><strong>Close &amp; pro-rata refunds</strong><span><code>closeCampaign</code> snapshots what's unspent; <code>claimRefund</code> returns each donor's share. There is no withdraw or sweep function at all.</span></li>
+        </ol>
+        <div class="badges">
+          <span class="badge">✓ 32 passing tests</span>
+          <span class="badge">Hardhat · Solidity</span>
+          <span class="badge">Celo Sepolia &amp; Base Sepolia deploy scripts</span>
+          <a class="badge badge-link" href="https://github.com/Remmylof/nairaaid" target="_blank" rel="noopener">View source on GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="section" id="roadmap">
+      <div class="wrap">
+        <p class="eyebrow">Roadmap &amp; sustainability</p>
+        <h2>From a demo to real students</h2>
+        <div class="roadmap">
+          <article class="rm"><span class="rm-tag">Now</span><h3>Hackathon prototype</h3><p>Contract, 32 tests, end-to-end demo, testnet deploy scripts, this interactive site.</p></article>
+          <article class="rm"><span class="rm-tag">Next</span><h3>Pilot: 20–50 students</h3><p>One campus in Ilorin with faculty officers and the student union as verifiers, a simple verifier app and bank off-ramp.</p></article>
+          <article class="rm"><span class="rm-tag">Then</span><h3>2–3 NGOs + USSD</h3><p>Partner NGOs and faith-based funds run their own campaigns. USSD access so recipients on feature phones can check and cash out.</p></article>
+        </div>
+        <div class="two-col sus">
+          <div class="card">
+            <h3>Sustainability</h3>
+            <ul class="ticks">
+              <li>Optional organiser fee, capped at 3% and paid on top by donors, never taken from recipients.</li>
+              <li>Ecosystem and social-impact grants for development and pilots.</li>
+              <li>Low running costs: one shared contract, Celo gas measured in fractions of a cent.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Risks we're honest about</h3>
+            <ul class="ticks ticks-warn">
+              <li>Verifier collusion: reduced by requiring two independent verifiers, not removed.</li>
+              <li>Off-ramp access and stablecoin regulation can change.</li>
+              <li>Smart-contract risk: unaudited; an audit comes before real funds.</li>
+              <li>Digital literacy: USSD and agents needed for people without smartphones.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="#top"><span class="logo" aria-hidden="true">₦</span><span class="brand-name">Naira<span>Aid</span></span></a>
+        <p class="muted small">Built by Lawal Ridwan for SMU Web3 for Social Good 2026</p>
+        <p class="muted small">Demo only. Illustrative figures. Unaudited prototype, testnets only.</p>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:rlawal914@gmail.com">rlawal914@gmail.com</a>
+        <a href="https://x.com/sedetsenar" target="_blank" rel="noopener">X @sedetsenar</a>
+        <a href="https://github.com/Remmylof/nairaaid" target="_blank" rel="noopener">github.com/Remmylof/nairaaid</a>
+      </div>
+      <div class="footer-reset">
+        <button class="btn btn-gold" data-reset>Reset demo</button>
+        <p class="feedback" id="reset-feedback" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="wrap footer-bottom muted small">© <span id="year">2026</span> NairaAid · MIT licence</div>
+  </footer>
+
+  <script src="docs/app.js"></script>
+</body>
+</html>
