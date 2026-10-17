@@ -1,0 +1,115 @@
+
+> nairaaid@0.1.0 demo
+> hardhat run scripts/demo.ts
+
+
+══════════════════════════════════════════════════════════════════════════════
+  NairaAid demo · Ilorin Flood Relief for Students (cNGN on a local Celo-compatible chain)
+══════════════════════════════════════════════════════════════════════════════
+1. Deployed MockCNGN (6 decimals) at 0x5FbD…0aa3, NairaAidCampaigns at 0xe7f1…0512
+2. Organiser (student-union relief committee) created campaign #1:
+     rules: ₦20,000/month stipend × 2 months · milestone 'School fees 2026/27' ₦50,000
+     max 5 recipients · 1% platform fee paid by donors (never deducted from students)
+3. Added 3 independent local verifiers: Dr. Adeyemi (faculty lecturer), SU welfare officer, Imam / community NGO agent
+   🛡️  BLOCKED  organiser adds themselves as a verifier  →  reverted with ConflictOfInterest
+
+══════════════════════════════════════════════════════════════════════════════
+  Donations
+══════════════════════════════════════════════════════════════════════════════
+   💚 Diaspora donor (London)        donated   ₦250,000  (+ ₦2,500 platform fee)
+   💚 Church welfare fund (Ilorin)   donated   ₦150,000  (+ ₦1,500 platform fee)
+   💚 Alumni association             donated   ₦100,000  (+ ₦1,000 platform fee)
+   Pool: ₦500,000 from 3 donors · fees to platform: ₦5,000
+
+══════════════════════════════════════════════════════════════════════════════
+  Recipient registration (2 distinct verifiers each, anonymous IDs only)
+══════════════════════════════════════════════════════════════════════════════
+   ⚠️  Lecturer attested a 'ghost' recipient 0xd2d28641c2… alone (1/2 attestations)
+   🛡️  BLOCKED  same verifier attests the ghost a 2nd time  →  reverted with AlreadyAttested
+   🛡️  BLOCKED  ghost tries to claim a stipend while pending  →  reverted with RecipientNotActive
+   ✅ Student 1  id=0x4fa0fca7d97b…  wallet=0x2361…1E8f  attested by Dr. Adeyemi + SU welfare officer
+   ✅ Student 2  id=0x9ef0b95c2f57…  wallet=0xa0Ee…9720  attested by SU welfare officer + Imam / community NGO agent
+   ✅ Student 3  id=0x4fd0b9654327…  wallet=0xBcd4…4096  attested by Imam / community NGO agent + Dr. Adeyemi
+   ✅ Student 4  id=0xe64c7374757f…  wallet=0x71bE…5788  attested by Dr. Adeyemi + SU welfare officer
+   ✅ Student 5  id=0xe185f1d125dc…  wallet=0xFABB…694a  attested by SU welfare officer + Imam / community NGO agent
+   Active recipients: 5 (ghost still pending: yes)
+   On-chain: only keccak256(phone ‖ salt) + wallet. Names, phone numbers, IDs, flood-damage photos stay off-chain.
+
+══════════════════════════════════════════════════════════════════════════════
+  Month 1 · stipend
+══════════════════════════════════════════════════════════════════════════════
+   💸 5 students each claimed ₦20,000 → ₦100,000 paid
+   🛡️  BLOCKED  Student 1 claims month 1 again (double claim)  →  reverted with NothingToClaim
+
+══════════════════════════════════════════════════════════════════════════════
+  Milestone · School fees 2026/27 (needs 2 verifier confirmations)
+══════════════════════════════════════════════════════════════════════════════
+   🎓 Student 1: fee invoice checked by Lecturer + SU officer → ₦50,000 paid
+   🎓 Student 2: fee invoice checked by Lecturer + SU officer → ₦50,000 paid
+   🎓 Student 3: fee invoice checked by Lecturer + SU officer → ₦50,000 paid
+   🎓 Student 4: fee invoice checked by Lecturer + SU officer → ₦50,000 paid
+   ⚠️  Student 5: only the NGO agent has confirmed (1/2), invoice not yet seen by a second verifier
+   🛡️  BLOCKED  COLLUSION: NGO agent confirms Student 5's school fees a 2nd time  →  reverted with AlreadyConfirmed
+   🛡️  BLOCKED  organiser tries to confirm Student 5's milestone  →  reverted with NotVerifier
+   Student 5 milestone: 1/2 confirmations, paid=false
+
+══════════════════════════════════════════════════════════════════════════════
+  Month 2 · stipend
+══════════════════════════════════════════════════════════════════════════════
+   💸 5 students each claimed ₦20,000 → ₦100,000 paid
+
+══════════════════════════════════════════════════════════════════════════════
+  Organiser drain attempts
+══════════════════════════════════════════════════════════════════════════════
+   ABI has a withdraw/sweep/rescue function? no
+   🛡️  BLOCKED  verifier registers the organiser's wallet as a recipient  →  reverted with ConflictOfInterest
+
+══════════════════════════════════════════════════════════════════════════════
+  Campaign end · close · pro-rata refunds
+══════════════════════════════════════════════════════════════════════════════
+   🔒 Campaign closed by a donor after the schedule ended. Unspent pool: ₦100,000
+   🛡️  BLOCKED  Student 2 tries to claim after close  →  reverted with NotActive
+   🛡️  BLOCKED  organiser claims a refund without having donated  →  reverted with NothingToRefund
+   ↩️  Diaspora donor (London)        gave   ₦250,000 → refunded   ₦50,000 (50%)
+   ↩️  Church welfare fund (Ilorin)   gave   ₦150,000 → refunded   ₦30,000 (30%)
+   ↩️  Alumni association             gave   ₦100,000 → refunded   ₦20,000 (20%)
+
+══════════════════════════════════════════════════════════════════════════════
+  Public dashboard (all values read from chain)
+══════════════════════════════════════════════════════════════════════════════
+   Status:           Closed
+   Raised:           ₦500,000
+   Paid to students: ₦400,000
+   Refunded donors:  ₦100,000
+   Platform fees:    ₦5,000 (paid by donors on top)
+   Balance left:     ₦0
+   Recipients:       5 · Donors: 3 · Verifiers: 3
+   Organiser cNGN balance: ₦0
+
+   Per-student totals:
+     Student 1  0x4fa0fca7d97b…  received   ₦90,000  (wallet balance ₦90,000)
+     Student 2  0x9ef0b95c2f57…  received   ₦90,000  (wallet balance ₦90,000)
+     Student 3  0x4fd0b9654327…  received   ₦90,000  (wallet balance ₦90,000)
+     Student 4  0xe64c7374757f…  received   ₦90,000  (wallet balance ₦90,000)
+     Student 5  0xe185f1d125dc…  received   ₦40,000  (wallet balance ₦40,000)
+
+══════════════════════════════════════════════════════════════════════════════
+  Payout trail (Payout events, anyone can replay these)
+══════════════════════════════════════════════════════════════════════════════
+   block  30  0x4fa0fca7d9…  → 0x2361…1E8f   ₦20,000  stipend from period 1
+   block  31  0x9ef0b95c2f…  → 0xa0Ee…9720   ₦20,000  stipend from period 1
+   block  32  0x4fd0b96543…  → 0xBcd4…4096   ₦20,000  stipend from period 1
+   block  33  0xe64c737475…  → 0x71bE…5788   ₦20,000  stipend from period 1
+   block  34  0xe185f1d125…  → 0xFABB…694a   ₦20,000  stipend from period 1
+   block  37  0x4fa0fca7d9…  → 0x2361…1E8f   ₦50,000  milestone #0 (school fees)
+   block  39  0x9ef0b95c2f…  → 0xa0Ee…9720   ₦50,000  milestone #0 (school fees)
+   block  41  0x4fd0b96543…  → 0xBcd4…4096   ₦50,000  milestone #0 (school fees)
+   block  43  0xe64c737475…  → 0x71bE…5788   ₦50,000  milestone #0 (school fees)
+   block  48  0x4fa0fca7d9…  → 0x2361…1E8f   ₦20,000  stipend from period 2
+   block  49  0x9ef0b95c2f…  → 0xa0Ee…9720   ₦20,000  stipend from period 2
+   block  50  0x4fd0b96543…  → 0xBcd4…4096   ₦20,000  stipend from period 2
+   block  51  0xe64c737475…  → 0x71bE…5788   ₦20,000  stipend from period 2
+   block  52  0xe185f1d125…  → 0xFABB…694a   ₦20,000  stipend from period 2
+   14 payouts, total ₦400,000
+
+✅ Demo complete: every naira is accounted for (₦400,000 paid + ₦100,000 refunded = ₦500,000).
